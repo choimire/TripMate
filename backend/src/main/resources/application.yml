@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:mysql://miresql-1.cpsamseo602e.ap-northeast-2.rds.amazonaws.com:3306/trip_planner?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: admin
+    password: alfm1234~~
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+server:
+  port: 8080
+google:
+  maps:
+    api-key: "AIzaSyBQY_C696ZC9NjK7pR0GCpRq2PH52ZZZ34"
