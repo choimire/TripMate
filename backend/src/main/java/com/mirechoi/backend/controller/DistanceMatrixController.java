@@ -7,7 +7,6 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
 public class DistanceMatrixController {
 
     private final DistanceMatrixService service;
@@ -78,4 +77,5 @@ public class DistanceMatrixController {
 
         return schedule;
     }
+    
 }

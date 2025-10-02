@@ -17,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/api/locations")
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("api/locations")
 public class TriplannerController {
 
     private final TriplannerService service;
