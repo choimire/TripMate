@@ -39,3 +39,4 @@ out/
 ## src 전체허용
 !src/main/**
 !src/test/**
+!frontend/
