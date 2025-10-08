@@ -28,6 +28,16 @@
 4. 일정별 여행지 마커 및 애니메이션
 
 
+## 🖥️화면 구성
+|메인화면|지도 및 일정표|
+|--------|--------|
+|<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/421daa1d-fd1a-4c4d-9086-b0f224e28e5f" />|<img width="400" height="200" alt="Image" src="https://github.com/user-attachments/assets/018a72b2-0479-4a09-b91e-271013ddae04" />|
+---
+반응형
+|메인화면|지도|일정표|
+|------|------|------|
+|<img width="200" height="400" alt="Image" src="https://github.com/user-attachments/assets/4ffd4fea-3156-41a7-8d7a-10a1640eac6d" /> |<img width="200" height="400" alt="Image" src="https://github.com/user-attachments/assets/f6f10d0c-3a41-4e38-9ddb-a2870f009f06" /> |<img width="200" height="400" alt="Image" src="https://github.com/user-attachments/assets/956e8ca5-169c-4849-9529-38c9346a9594" />|
+---
 ## 🎨기술스택
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)
