@@ -58,12 +58,41 @@
 |Gradle|	8.14.3|
 |Spring Boot|	3.5.5|
 |브라우저|	Chrome|
-|기타 도구|	Git, AWS|
+|기타 도구|	Git, AWS,ChatGPT|
 
+## 🚀 실행 방법 (How to Run)
 
-## 🕖개발기간
-2025.09.13~2025.10.03
+### 1️⃣ 환경 변수 설정  
+프로젝트 실행 전, 각 폴더(`frontend`, `backend`)에 `.env` 파일을 생성해 주세요.  
 
+> 예시:
+> ```bash
+> # frontend/.env
+> REACT_APP_GOOGLE_MAPS_API_KEY=YOUR_API_KEY
+>
+> # backend/.env
+> DB_URL=jdbc:mysql://localhost:3306/tripmate
+> DB_USERNAME=YOUR_DB_USERNAME
+> DB_PASSWORD=YOUR_DB_PASSWORD
+> ```
+
+---
+
+### 2️⃣ Frontend 실행  
+```bash
+cd frontend
+npm install
+npm start
+```
+> ✅ 실행 후: http://localhost:3000 접속
+---
+### 3️⃣ backend 실행
+```bash
+cd backend
+./gradlew bootRun
+```
+> ✅ 실행 후: http://localhost:8080 에서 서버API 동작 확인
+---
 
 ## 🚨 Troubleshooting
 
@@ -89,10 +118,10 @@
 - **내용:** `axios.fetch is not a function`
 - **원인:** `axios.get` 대신 잘못된 메서드 호출
 - **해결:** 
-  ```js
+```js
   const res = await axios.get(url);
   const data = res.data;
-
+```
 ---
 
 ### 4. **AWS EC2 SSH 연결 문제**
@@ -102,31 +131,53 @@
      - EC2 보안 그룹에서 인바운드 규칙에 포트 22 허용
      - 탄력적 IP를 EC2 인스턴스에 연결
      - SSH 키 파일 권한(`chmod 400 key.pem`) 확인
-     - SSH 연결 명령 예시:  
-       ```bash
-       ssh -i ~/key/my-key.pem ubuntu@<탄력적 IP>
-       ```
 
 ---
 
-### 5. **환경 변수(API Key) 문제**
-   - **증상:** Google Maps, API 호출 시 인증 오류
-   - **원인:** `.env` 파일 미설정 또는 React 환경 변수 미적용
-   - **해결 방법:** 
-     - 프로젝트 루트에 `.env` 생성  
-       ```env
-       REACT_APP_GOOGLE_MAPS_API_KEY=google_api_key
-       REACT_APP_API_BASE=http://backend-url
-       ```
-     - React 앱 재시작 후 적용 (`npm start` 또는 `npm run build`)
-     - 빌드 배포 시 `process.env.REACT_APP_...` 값 확인
+### 5. EC2 재부팅 후 서버 자동 실행 문제
+- **증상:** EC2 재시작 시 백엔드 서버가 종료되어 API 호출 불가
+- **원인:** 수동 실행(`nohup`)만 사용 → 인스턴스 재시작 시 프로세스 종료됨
+- **해결:**
+  - `systemd` 서비스 등록 (`tripmate.service`)
+  - 자동 실행 설정  
+    ```bash
+    sudo systemctl enable tripmate
+    sudo systemctl start tripmate
+    ```
+  - 확인 명령:  
+    ```bash
+    sudo systemctl status tripmate
+    ```
 
----
+## ☄️개선 예정 기능 (Improvement Plan)
 
-### 6. **모바일 Safari 호환성**
-   - **증상:** iPhone Safari에서 지도/버튼/레이아웃 깨짐
-   - **원인:** 로컬 호스트 환경에서는 모바일에서 테스트 불가, 일부 CSS/JS 호환 문제
-   - **해결 방법:** 
-     - 프론트 빌드 후 S3 + CloudFront로 배포
-     - 모바일 Safari에서 접속 테스트
-     - 필요 시 Tailwind responsive 클래스와 meta viewport 재검토
+현재 서비스는 기본적인 여행지 추가 및 일정 자동 최적화 기능에 초점을 맞추고 있습니다.  
+향후 아래의 기능들을 순차적으로 업데이트할 예정입니다. ✨
+
+### 🧭 여행 계획 관련
+- ✅ 여행지 간 **거리 및 시간 계산 정확도 개선**
+- ✅ **AI 추천 루트 기능** 추가 (날씨 / 교통량 / 리뷰 기반)
+- ✅ 사용자가 직접 **여행지 순서 수정** 가능하도록 기능 개선
+
+### 💾 사용자 편의 기능
+- ✅ 여행지 정보에 **이미지 미리보기 썸네일** 추가
+- ✅ 다크 모드 지원 🌙
+
+### 💬 커뮤니티 및 공유
+- ✅ 여행 일정 **공유 링크 생성 기능**
+
+### 🔒 계정 및 데이터 관리
+- ✅ 로그인 / 회원가입 UX 개선 (소셜 로그인 포함)
+- ✅ 사용자별 **저장된 여행 일정 관리 페이지** 추가
+
+### ⚙️ 성능 및 안정성
+- ✅ 서버 리소스 최적화 및 로딩 속도 개선
+- ✅ AWS EC2 + S3 기반 배포 자동화
+
+
+## 🌐 배포 링크
+- **Frontend (S3)**: [http://tripmate-front.s3-website.ap-northeast-2.amazonaws.com](http://tripmate-front.s3-website.ap-northeast-2.amazonaws.com)
+- **Backend (EC2)**: `http://54.180.37.41:8080`
+
+## 🕖개발기간
+2025.09.13~2025.10.03
